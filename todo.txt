@@ -1,0 +1,2 @@
+Fix <%load staticFiles%> bug
+Display Help Page

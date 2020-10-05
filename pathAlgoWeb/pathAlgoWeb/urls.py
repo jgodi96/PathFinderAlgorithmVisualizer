@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from pathAlgoWebApp import views
+from django.urls import include
 
 urlpatterns = [
+
     path('',views.home,name='home'),
-    path('',views.help,name='help'),
+    path('help/', include('pathAlgoWebApp.urls')),
     path('admin/', admin.site.urls),
 ]

@@ -27,14 +27,18 @@ $(document).ready(function() {
        function doSomething() {
        if (!mouseStillDown) { return; }
 
-       $(".grid").mouseover(function() {
-       $(this).css("background-color", "black");
-       });
+       $(".grid").on('mouseenter', function () {  $(this).css("background-color", "black"); });
+
+
+
 
        if (mouseStillDown) {   interval = setTimeout(doSomething,100); }
    }
    $(".grid").mouseup(function(event) {
+     
+     $(".grid").off('mouseenter');
     mouseStillDown = false;
+    doSomething()
 });
 
 

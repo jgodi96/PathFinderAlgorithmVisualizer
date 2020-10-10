@@ -1,12 +1,14 @@
 // function that builds a grid in the "container"
 function createGrid(x) {
-    for (var rows = 0; rows < x; rows++) {
-        for (var columns = 0; columns < x; columns++) {
-            $("#container").append("<div class='grid'></div>");
-        };
-    };
+  for (var i =0; i < x; i++) {
+     let row = $('#container').append('<tr>');
+     for (col= 0; col < x; col++) {
+         $('tr').append('<td class = "grid"></td>');
+     }
+ }
     $(".grid").width(1500/x);
     $(".grid").height(900/x);
+
 };
 // function that clears the grid
 function clearGrid(){
@@ -35,7 +37,7 @@ $(document).ready(function() {
        if (mouseStillDown) {   interval = setTimeout(doSomething,100); }
    }
    $(".grid").mouseup(function(event) {
-     
+
      $(".grid").off('mouseenter');
     mouseStillDown = false;
     doSomething()

@@ -1,49 +1,51 @@
 // function that builds a grid in the "container"
 function createGrid(x) {
   for (var i =0; i < x; i++) {
+    //rows, columns,
      let row = $('#container').append('<tr>');
      for (col= 0; col < x; col++) {
-         $('tr').append('<td class = "grid"></td>');
+         $('tr').append('<td class = "cell"></td>');
      }
  }
-    $(".grid").width(1500/x);
-    $(".grid").height(900/x);
+  //size of cell
+    $(".cell").width(1500/x);
+    $(".cell").height(900/x);
 
 };
 // function that clears the grid
 function clearGrid(){
-    $(".grid").remove();
+    $(".cell").remove();
 };
-//grid
+
+//Wall Draw
 $(document).ready(function() {
     createGrid(20);
 
     var mouseStillDown = false;
-
-    $(".grid").mousedown(function() {
+    //When mouse clicked
+    $(".cell").mousedown(function() {
       mouseStillDown = true;
       $(this).css("background-color", "black");
-      doSomething();
+      mouseHeldDown();
        });
-
-       function doSomething() {
+       //Function runs when mouse is clicked
+       function mouseHeldDown() {
+         //returns if mouse is not clicked
        if (!mouseStillDown) { return; }
-
-       $(".grid").on('mouseenter', function () {  $(this).css("background-color", "black"); });
-
-
-
-
+       //when entering a cell, the background changes to black.
+       $(".cell").on('mouseenter',function () {  $(this).css("background-color", "black"); });
+       //runs mouseHeldDown function every 100millseconds
        if (mouseStillDown) {   interval = setTimeout(doSomething,100); }
    }
-   $(".grid").mouseup(function(event) {
-
-     $(".grid").off('mouseenter');
+   //when mouse click is up
+   $(".cell").mouseup(function (event) {
+     //turns off mouse enter function and stops changing color to black.
+     $(".cell").off('mouseenter');
     mouseStillDown = false;
-    doSomething()
+    mouseHeldDown()
 });
 
-
+  //TODO make a button to refresh grid
     $(".newGrid").click(function() {
         refreshGrid();
 

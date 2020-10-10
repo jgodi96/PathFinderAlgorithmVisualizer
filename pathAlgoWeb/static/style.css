@@ -25,3 +25,8 @@ body{
 	outline:1px solid #000;
 	display:inline-block;
 }
+
+.newGrid{
+  display: flex;
+  justify-content: center;
+}

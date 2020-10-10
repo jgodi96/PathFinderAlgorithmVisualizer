@@ -1,11 +1,12 @@
 // function that builds a grid in the "container"
 function createGrid(size) {
-  for (var i =0; i < size; i++) {
+  for (var row =0; row< size; row++) {
     //rows, columns,
-     $('#container').append('<tr>');
+     let rows = $('<tr></tr>');
      for (var col= 0; col < size; col++) {
-         $('tr').append('<td class = "cell"></td>');
+         rows.append('<td class = "cell"></td>');
      }
+    $("#container").append(rows);
  }
 //size of cell
     $(".cell").width(1500/size);
@@ -13,8 +14,8 @@ function createGrid(size) {
 
 };
 // function that clears the grid
-function clearGrid(){
-    $(".cell").remove();
+function refreshGrid(){
+    $(".cell").css("background-color",'');
 };
 //function that contains wall draw logic
 function wallDraw(){

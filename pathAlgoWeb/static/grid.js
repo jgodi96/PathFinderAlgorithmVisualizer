@@ -1,22 +1,22 @@
 // function that builds a grid in the "container"
-function createGrid(x) {
-  for (var i =0; i < x; i++) {
+function createGrid(size) {
+  for (var i =0; i < size; i++) {
     //rows, columns,
      $('#container').append('<tr>');
-     for (col= 0; col < x; col++) {
+     for (var col= 0; col < size; col++) {
          $('tr').append('<td class = "cell"></td>');
      }
  }
 //size of cell
-    $(".cell").width(1500/x);
-    $(".cell").height(900/x);
+    $(".cell").width(1500/size);
+    $(".cell").height(900/size);
 
 };
 // function that clears the grid
 function clearGrid(){
     $(".cell").remove();
 };
-//wall draw logic
+//function that contains wall draw logic
 function wallDraw(){
   var mouseStillDown = false;
   //When mouse clicked
@@ -25,8 +25,8 @@ function wallDraw(){
     $(this).css("background-color", "black");
     mouseHeldDown();
      });
-     //Function runs when mouse is clicked
-     function mouseHeldDown() {
+//Function runs when mouse is clicked and held
+ function mouseHeldDown() {
        //returns if mouse is not clicked
      if (!mouseStillDown) { return; }
      //when entering a cell, the background changes to black.
@@ -39,16 +39,16 @@ function wallDraw(){
    //turns off mouse enter function and stops changing color to black.
    $(".cell").off('mouseenter');
   mouseStillDown = false;
-  mouseHeldDown()
+  mouseHeldDown();
 });
 }
 
-//main func
+//main function
 $(document).ready(function() {
-  //make grid
+//make grid
     createGrid(20);
-//----------wall draw function-------------
-    wallDraw()
+//wall draw
+    wallDraw();
 
   //TODO make a button to refresh grid
     $(".newGrid").click(function() {

@@ -6,21 +6,33 @@ function createGrid(size) {
     const currentRow = [];
     //rows, columns,
      for (var col= 0; col < size; col++) {
-       $("#container").append("<div class='cell'></div>");
+       if (row === 0 && col === 0){
+         $("#container").append("<div class='cell start-node'></div>");
+       }
+       else if (row === 19 && col ===19){
+         $("#container").append("<div class='cell final-node'></div>");
+       }
+       else{
+         $("#container").append("<div class='cell unvisit'></div>");
+       }
+
         const currentNode = {
           col,
           row,
           isStart: row === 1 && col === 1,
           isFinish: row === 20 && col ===20
         }
-         currentRow.push(currentNode)
+
+         currentRow.push(currentNode);
      }
+  nodes.push(currentRow);
  }
+
 //size of cell
     $(".cell").width(1500/size);
     $(".cell").height(900/size);
-
 };
+
 // function that clears the grid
 function refreshGrid(){
     $(".cell").css("background-color",'');
@@ -56,12 +68,16 @@ function wallDraw(){
 $(document).ready(function() {
 //make grid
     createGrid(20);
+//set start and finish nodes (hard coded to row 1 row 1, row 20, row 20)
+    //setStartFinish();
 //wall draw
     wallDraw();
 
   //TODO make a button to refresh grid
     $(".newGrid").click(function() {
         refreshGrid();
-
+        check();
     });
+
+
 })

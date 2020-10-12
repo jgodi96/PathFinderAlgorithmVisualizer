@@ -7,6 +7,12 @@ body{
   display: flex;
   justify-content: center;
 }
+.start-node{
+  background-color: green;
+}
+.final-node{
+  background-color: red;
+}
 #container {
 	position: relative;
 	top: 30px;
@@ -25,6 +31,9 @@ body{
 	border:none;
 	outline:1px solid #000;
 	display:inline-block;
+}
+.unvisit {
+
 }
 
 .gridContainer{

@@ -1,3 +1,4 @@
+
 body{
   background-color: grey;
 }
@@ -26,7 +27,6 @@ body{
 	display:inline-block;
 }
 
-.newGrid{
-  display: flex;
-  justify-content: center;
+.gridContainer{
+  text-align: center;
 }

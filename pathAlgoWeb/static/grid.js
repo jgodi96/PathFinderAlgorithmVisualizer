@@ -1,4 +1,5 @@
 // function that builds a grid in the "container"
+
 function createGrid(size) {
   for (var row =0; row< size; row++) {
     //rows, columns,
@@ -8,6 +9,52 @@ function createGrid(size) {
      }
     $("#container").append(rows);
  }
+ //get initial grid
+ getInitialGrid = (
+    rowCount = 20,
+    colCount = 20,
+  ) => {
+    const nodes = [];
+    for (let row = 0; row < rowCount; row++) {
+      const currentRow = [];
+      for (let col = 0; col < colCount; col++) {
+        currentRow.push(this.createNode(row, col));
+      }
+      initialGrid.push(currentRow);
+    }
+    return initialGrid;
+  };
+
+  djikstraAlgorithm(startNode) {
+     let distances = {};
+
+     // Stores the reference to previous nodes
+     let prev = {};
+     let pq = new PriorityQueue(this.nodes.length * this.nodes.length);
+
+     // Set distances to all nodes to be infinite except startNode
+     distances[startNode] = 0;
+     pq.enqueue(startNode, 0);
+     this.nodes.forEach(node => {
+        if (node !== startNode) distances[node] = Infinity;
+        prev[node] = null;
+     });
+
+     while (!pq.isEmpty()) {
+        let minNode = pq.dequeue();
+        let currNode = minNode.data;
+        let weight = minNode.priority;
+        this.edges[currNode].forEach(neighbor => {
+           let alt = distances[currNode] + neighbor.weight;
+           if (alt < distances[neighbor.node]) {
+              distances[neighbor.node] = alt;
+              prev[neighbor.node] = currNode;
+              pq.enqueue(neighbor.node, distances[neighbor.node]);
+           }
+        });
+     }
+     return distances;
+  }
 //size of cell
     $(".cell").width(1500/size);
     $(".cell").height(900/size);

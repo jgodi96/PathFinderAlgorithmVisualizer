@@ -1,3 +1,7 @@
+const START_NODE_ROW = 9;
+const START_NODE_COL = 3;
+const END_NODE_ROW = 9;
+const END_NODE_COL = 16;
 // function that builds a grid in the "container"
 function createGrid(size) {
   const nodes = []
@@ -5,10 +9,10 @@ function createGrid(size) {
     const currentRow = [];
     //rows, columns,
      for (var col= 0; col < size; col++) {
-       if (row === 0 && col === 0){
+       if (row === START_NODE_ROW && col === START_NODE_COL){
          $("#container").append("<div class='cell start-node'></div>");
        }
-       else if (row === 19 && col ===19){
+       else if (row === END_NODE_ROW && col ===END_NODE_COL){
          $("#container").append("<div class='cell final-node'></div>");
        }
        else{
@@ -18,8 +22,8 @@ function createGrid(size) {
         const currentNode = {
           col,
           row,
-          isStart: row === 0 && col === 0,
-          isFinish: row === 19 && col ===19,
+          isStart: row === START_NODE_ROW && col === START_NODE_COL,
+          isFinish: row === END_NODE_ROW && col === END_NODE_COL,
           distance:Infinity,
           isVisited:false,
           isWall:false,
@@ -77,15 +81,30 @@ function wallDraw(){
 });
 }
 //animate grid Function
-animateDijkstra(visitedNodeInorder){
-  return;
-}
+/*animateDijkstra(visitedNodeInorder,g){
+  for (let i =0; i< visitedNodesInOrder.length; i++){
+      const nodenode = visitedNodesInOrder[i];
+      const newGrid = g.slice();
+      const newNode = {
+        ...nodenode,
+        isVisited: true,
+      };
+      newGrid[nodenode.row][nodenode.col] = newNode;
+      setTimeout(()==>{
+        grid = newGrid,10*i
+
+      })
+
+
+  }
+}*/
 //visualize dijstras algorithm Function
 function visualizeDijkstras(g) {
-  const startNode = g[0][0]
-  const finishNode = g[19][19]
+  const startNode = g[START_NODE_ROW][START_NODE_COL]
+  const finishNode = g[END_NODE_ROW][END_NODE_COL]
   const visitedNodesInOrder = dijkstra(g,startNode,finishNode)
-  console.log(visitedNodesInOrder);
+  //console.log(visitedNodesInOrder);
+  animateDijkstra(visitedNodesInOrder,g);
 }
 //main function
 $(document).ready(function() {

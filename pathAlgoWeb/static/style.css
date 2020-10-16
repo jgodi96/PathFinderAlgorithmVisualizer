@@ -10,6 +10,13 @@ body{
 .start-node{
   background-color: green;
 }
+.titled{
+  margin-bottom: 0px;
+}
+.h1c{
+  margin-top:0px;
+  text-align: center;
+}
 .final-node{
   background-color: red;
 }
@@ -31,7 +38,9 @@ body{
 	padding: 0;
 	border: none;
 }
-
+.wall-node{
+  background-color: black;
+}
 .cell {
 	margin:0;
 	padding:0;

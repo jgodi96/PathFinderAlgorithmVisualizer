@@ -1,4 +1,3 @@
-
 // function that builds a grid in the "container"
 function createGrid(size) {
   const nodes = []
@@ -53,7 +52,11 @@ function wallDraw(){
        //returns if mouse is not clicked
      if (!mouseStillDown) { return; }
      //when entering a cell, the background changes to black
-     $(".cell").on('mouseenter',function () {  $(this).css("background-color", "black"); });
+     $(".cell").on('mouseenter',function () {
+       if ($(this).hasClass("unvisit")){
+        $(this).css("background-color", "black");
+      }
+      });
 
      //runs mouseHeldDown function every 100millseconds
      if (mouseStillDown) {   interval = setTimeout(doSomething,100); }

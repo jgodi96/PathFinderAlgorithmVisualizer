@@ -2,7 +2,9 @@
 body{
   background-color: grey;
 }
-
+.li{
+  font-size: 500px;
+}
 .list-group.list-group-horizontal.hi{
   display: flex;
   justify-content: center;
@@ -41,6 +43,18 @@ body{
 .wall-node{
   background-color: black;
 }
+.menu ul {
+  list-style: none;
+  padding: 0;
+  display: inline-flex
+}
+.dummyCell{
+  margin:0;
+	padding:0;
+	border:none;
+	outline:1px solid #000;
+	display:inline-block;
+}
 .cell {
 	margin:0;
 	padding:0;
@@ -54,4 +68,23 @@ body{
 
 .gridContainer{
   text-align: center;
+}
+
+.green{
+  background-color: green;
+}
+.yellow{
+  background-color: yellow;
+}
+.blue{
+  background-color: blue;
+}
+.red{
+  background-color: red;
+}
+.black{
+  background-color: black;
+}
+.grey{
+  background-color: grey;
 }

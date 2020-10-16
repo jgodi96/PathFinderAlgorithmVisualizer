@@ -38,6 +38,9 @@ $("#container").empty()
 //size of cell
    $(".cell").width(1500/20);
    $(".cell").height(900/20);
+   $(".dummyCell").width(1500/20);
+   $(".dummyCell").height(900/20);
+
 return nodes;
 }
 

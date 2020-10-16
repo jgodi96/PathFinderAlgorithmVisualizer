@@ -16,6 +16,10 @@ body{
 .visited-node{
   background-color: blue;
 }
+.shortest-node{
+  background-color: yellow;
+}
+
 #container {
 	position: relative;
 	top: 30px;

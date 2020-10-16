@@ -11,14 +11,17 @@ $("#container").empty()
    const currentRow = [];
    //rows, columns,
     for (var col= 0; col < 20; col++) {
-      if (gr[row][col].row === START_NODE_ROW && gr[row][col].col === START_NODE_COL){
+      if (gr[row][col].row === START_NODE_ROW && gr[row][col].col === START_NODE_COL && gr[row][col].isShortest==false){
         $("#container").append("<div class='cell start-node'></div>");
       }
-      else if (gr[row][col].row === END_NODE_ROW && gr[row][col].col ===END_NODE_COL){
+      else if (gr[row][col].row === END_NODE_ROW && gr[row][col].col ===END_NODE_COL && gr[row][col].isShortest==false){
         $("#container").append("<div class='cell final-node'></div>");
       }
-      else if (gr[row][col].isVisited == true){
+      else if (gr[row][col].isVisited == true && gr[row][col].isShortest==false){
         $("#container").append("<div class='cell visited-node'></div>");
+      }
+      else if (gr[row][col].isShortest == true){
+        $("#container").append("<div class='cell shortest-node'></div>");
       }
       else{
         $("#container").append("<div class='cell unvisit'></div>");
@@ -49,6 +52,7 @@ function createGrid(size) {
           isVisited:false,
           isWall:false,
           previousNode: null,
+          isShortest: false,
 
         }
 
@@ -99,18 +103,29 @@ function wallDraw(){
 });
 }
 //animate grid Function
-function animateDijkstra(visitedNodesInOrder,g){
+function animateDijkstra(visitedNodesInOrder,nodesInShortestPath,g){
+  console.log(visitedNodesInOrder)
+  console.log(nodesInShortestPath)
   const newGrid = g.slice();
+  k=0
   for(let i =0; i< visitedNodesInOrder.length; i++){
 
       const nodenode = visitedNodesInOrder[i];
       const newNode = {
         ...nodenode,
         isVisited: true,
+        isShortest: nodesInShortestPath[k].row == visitedNodesInOrder[i].row && nodesInShortestPath[k].col == visitedNodesInOrder[i].col
       };
       newGrid[nodenode.row][nodenode.col] = newNode;
 
+      if (nodesInShortestPath[k].row == visitedNodesInOrder[i].row && nodesInShortestPath[k].col == visitedNodesInOrder[i].col){
+        if (k!=nodesInShortestPath.length-1)
+            k+=1;
+        console.log(k)
+      }
+
   }
+
 displayGrid(newGrid);
 console.log(newGrid);
 
@@ -120,8 +135,9 @@ function visualizeDijkstras(g) {
   const startNode = g[START_NODE_ROW][START_NODE_COL]
   const finishNode = g[END_NODE_ROW][END_NODE_COL]
   const visitedNodesInOrder = dijkstra(g,startNode,finishNode)
-  //console.log(visitedNodesInOrder);
-  animateDijkstra(visitedNodesInOrder,g);
+  const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode)
+  //console.log(nodesInShortestPathOrder)
+  animateDijkstra(visitedNodesInOrder,nodesInShortestPathOrder,g);
 }
 //main function
 $(document).ready(function() {

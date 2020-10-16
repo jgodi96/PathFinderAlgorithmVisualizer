@@ -18,18 +18,25 @@ function createGrid(size) {
         const currentNode = {
           col,
           row,
-          isStart: row === 1 && col === 1,
-          isFinish: row === 20 && col ===20
+          isStart: row === 0 && col === 0,
+          isFinish: row === 19 && col ===19,
+          distance:Infinity,
+          isVisited:false,
+          isWall:false,
+          previousNode: null,
+
         }
 
          currentRow.push(currentNode);
      }
   nodes.push(currentRow);
+
  }
 
 //size of cell
     $(".cell").width(1500/size);
     $(".cell").height(900/size);
+return nodes;
 };
 
 // function that clears the grid
@@ -69,21 +76,36 @@ function wallDraw(){
   mouseHeldDown();
 });
 }
-
+//animate grid Function
+animateDijkstra(visitedNodeInorder){
+  return;
+}
+//visualize dijstras algorithm Function
+function visualizeDijkstras(g) {
+  const startNode = g[0][0]
+  const finishNode = g[19][19]
+  const visitedNodesInOrder = dijkstra(g,startNode,finishNode)
+  console.log(visitedNodesInOrder);
+}
 //main function
 $(document).ready(function() {
 //make grid
-    createGrid(20);
+    grids = createGrid(20);
 //set start and finish nodes (hard coded to row 1 row 1, row 20, row 20)
     //setStartFinish();
 //wall draw
     wallDraw();
 
-  //TODO make a button to refresh grid
+  //grid
     $(".newGrid").click(function() {
         refreshGrid();
-        check();
     });
+
+  //visualize dijstras
+  $(".visualize").click(function() {
+        visualizeDijkstras(grids);
+  });
+
 
 
 })

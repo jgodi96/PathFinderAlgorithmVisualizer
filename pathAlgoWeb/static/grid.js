@@ -2,6 +2,7 @@ const START_NODE_ROW = 9;
 const START_NODE_COL = 3;
 const END_NODE_ROW = 9;
 const END_NODE_COL = 16;
+let wallSet = new Set()
 //display grid in web
 function displayGrid(gr){
 $("#container").empty()
@@ -11,6 +12,7 @@ $("#container").empty()
    const currentRow = [];
    //rows, columns,
     for (var col= 0; col < 20; col++) {
+
       if (gr[row][col].row === START_NODE_ROW && gr[row][col].col === START_NODE_COL && gr[row][col].isShortest==false){
         $("#container").append("<div class='cell start-node'></div>");
       }
@@ -70,13 +72,15 @@ function refreshGrid(){
     $(".cell").css("background-color",'');
 };
 //function that contains wall draw logic
-function wallDraw(){
+function wallDraw(setWall){
   var mouseStillDown = false;
   //When mouse clicked
   $(".cell").mousedown(function() {
     mouseStillDown = true;
     if ($(this).hasClass("unvisit")){
     $(this).css("background-color", "black");
+    console.log($(this).index())
+    setWall.add($(this).index())
     }
     mouseHeldDown();
      });
@@ -88,6 +92,9 @@ function wallDraw(){
      $(".cell").on('mouseenter',function () {
        if ($(this).hasClass("unvisit")){
         $(this).css("background-color", "black");
+        console.log($(this).index())
+        setWall.add($(this).index())
+        console.log(setWall)
       }
       });
 
@@ -101,7 +108,9 @@ function wallDraw(){
   mouseStillDown = false;
   mouseHeldDown();
 });
-}
+return setWall
+  }
+  
 //animate grid Function
 function animateDijkstra(visitedNodesInOrder,nodesInShortestPath,g){
   console.log(visitedNodesInOrder)
@@ -121,7 +130,7 @@ function animateDijkstra(visitedNodesInOrder,nodesInShortestPath,g){
       if (nodesInShortestPath[k].row == visitedNodesInOrder[i].row && nodesInShortestPath[k].col == visitedNodesInOrder[i].col){
         if (k!=nodesInShortestPath.length-1)
             k+=1;
-        console.log(k)
+        //console.log(k)
       }
 
   }
@@ -131,7 +140,7 @@ console.log(newGrid);
 
 }
 //visualize dijstras algorithm Function
-function visualizeDijkstras(g) {
+function visualizeDijkstras(g,wallSet) {
   const startNode = g[START_NODE_ROW][START_NODE_COL]
   const finishNode = g[END_NODE_ROW][END_NODE_COL]
   const visitedNodesInOrder = dijkstra(g,startNode,finishNode)
@@ -147,8 +156,10 @@ $(document).ready(function() {
 displayGrid(grids);
 //wall draw
     $(".whole-grid").hover(function(){
-      wallDraw();
+      wallSet = wallDraw(wallSet);
+      console.log(wallSet);
     });
+
 
   //grid
     $(".newGrid").click(function() {
@@ -160,7 +171,7 @@ displayGrid(grids);
   //visualize dijstras
   $(".visualize").click(function() {
 
-        visualizeDijkstras(grids);
+        visualizeDijkstras(grids,wallSet);
         console.log("done")
   });
 

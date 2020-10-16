@@ -1,4 +1,7 @@
 # Path Finder Algorithm Visualizer
-Using Dijkstra's algorithm, visualize the shortest path. You are able to draw walls so the algorithm can go around those walls to find the shortest Path. Developed using Django and python
+Using Dijkstra's algorithm, visualize the shortest path. <br />You are able to draw walls on the grid.<br /> Developed with django,python,javascript,jquery,html/css
 # What I learned
-in progress...
+* Dijkstra's Algorithm
+* jquery
+* advanced javascript
+* setting up django projects in python

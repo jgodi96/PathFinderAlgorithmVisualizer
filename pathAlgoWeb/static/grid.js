@@ -43,15 +43,18 @@ function wallDraw(){
   //When mouse clicked
   $(".cell").mousedown(function() {
     mouseStillDown = true;
+    if ($(this).hasClass("unvisit")){
     $(this).css("background-color", "black");
+    }
     mouseHeldDown();
      });
 //Function runs when mouse is clicked and held
  function mouseHeldDown() {
        //returns if mouse is not clicked
      if (!mouseStillDown) { return; }
-     //when entering a cell, the background changes to black.
+     //when entering a cell, the background changes to black
      $(".cell").on('mouseenter',function () {  $(this).css("background-color", "black"); });
+
      //runs mouseHeldDown function every 100millseconds
      if (mouseStillDown) {   interval = setTimeout(doSomething,100); }
  }

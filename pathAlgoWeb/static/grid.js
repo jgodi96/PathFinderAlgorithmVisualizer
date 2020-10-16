@@ -3,9 +3,10 @@ const START_NODE_COL = 3;
 const END_NODE_ROW = 9;
 const END_NODE_COL = 16;
 function displayGrid(gr){
-
+$("#container").empty()
   const nodes = []
  for (var row =0; row< 20; row++) {
+
    const currentRow = [];
    //rows, columns,
     for (var col= 0; col < 20; col++) {
@@ -15,11 +16,14 @@ function displayGrid(gr){
       else if (gr[row][col].row === END_NODE_ROW && gr[row][col].col ===END_NODE_COL){
         $("#container").append("<div class='cell final-node'></div>");
       }
+      else if (gr[row][col].isVisited == true){
+        $("#container").append("<div class='cell visited-node'></div>");
+      }
       else{
         $("#container").append("<div class='cell unvisit'></div>");
       }
     }
-
+    console.log("updated grid")
 }
 
 //size of cell
@@ -94,20 +98,22 @@ function wallDraw(){
 });
 }
 //animate grid Function
-/*animateDijkstra(visitedNodeInorder,g){
-  for (let i =0; i< visitedNodesInOrder.length; i++){
+function animateDijkstra(visitedNodesInOrder,g){
+  const newGrid = g.slice();
+  for(let i =0; i< visitedNodesInOrder.length; i++){
+
       const nodenode = visitedNodesInOrder[i];
-      const newGrid = g.slice();
       const newNode = {
         ...nodenode,
         isVisited: true,
       };
       newGrid[nodenode.row][nodenode.col] = newNode;
-      setTimeout(()==>{
-        grid = newGrid,10*i
-      })
+
   }
-}*/
+displayGrid(newGrid);
+console.log(newGrid);
+
+}
 //visualize dijstras algorithm Function
 function visualizeDijkstras(g) {
   const startNode = g[START_NODE_ROW][START_NODE_COL]
@@ -133,7 +139,10 @@ displayGrid(grids);
   //visualize dijstras
   $(".visualize").click(function() {
         visualizeDijkstras(grids);
+        console.log("done")
   });
+
+
 
 
 

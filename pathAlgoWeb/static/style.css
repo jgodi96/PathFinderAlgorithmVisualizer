@@ -13,6 +13,9 @@ body{
 .final-node{
   background-color: red;
 }
+.visited-node{
+  background-color: blue;
+}
 #container {
 	position: relative;
 	top: 30px;

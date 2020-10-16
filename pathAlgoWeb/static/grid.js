@@ -2,6 +2,31 @@ const START_NODE_ROW = 9;
 const START_NODE_COL = 3;
 const END_NODE_ROW = 9;
 const END_NODE_COL = 16;
+function displayGrid(gr){
+
+  const nodes = []
+ for (var row =0; row< 20; row++) {
+   const currentRow = [];
+   //rows, columns,
+    for (var col= 0; col < 20; col++) {
+      if (gr[row][col].row === START_NODE_ROW && gr[row][col].col === START_NODE_COL){
+        $("#container").append("<div class='cell start-node'></div>");
+      }
+      else if (gr[row][col].row === END_NODE_ROW && gr[row][col].col ===END_NODE_COL){
+        $("#container").append("<div class='cell final-node'></div>");
+      }
+      else{
+        $("#container").append("<div class='cell unvisit'></div>");
+      }
+    }
+
+}
+
+//size of cell
+   $(".cell").width(1500/20);
+   $(".cell").height(900/20);
+return nodes;
+}
 // function that builds a grid in the "container"
 function createGrid(size) {
   const nodes = []
@@ -9,15 +34,6 @@ function createGrid(size) {
     const currentRow = [];
     //rows, columns,
      for (var col= 0; col < size; col++) {
-       if (row === START_NODE_ROW && col === START_NODE_COL){
-         $("#container").append("<div class='cell start-node'></div>");
-       }
-       else if (row === END_NODE_ROW && col ===END_NODE_COL){
-         $("#container").append("<div class='cell final-node'></div>");
-       }
-       else{
-         $("#container").append("<div class='cell unvisit'></div>");
-       }
 
         const currentNode = {
           col,
@@ -37,9 +53,6 @@ function createGrid(size) {
 
  }
 
-//size of cell
-    $(".cell").width(1500/size);
-    $(".cell").height(900/size);
 return nodes;
 };
 
@@ -70,7 +83,7 @@ function wallDraw(){
       });
 
      //runs mouseHeldDown function every 100millseconds
-     if (mouseStillDown) {   interval = setTimeout(doSomething,100); }
+     if (mouseStillDown) {   interval = setTimeout(mouseHeldDown,100); }
  }
  //when mouse click is up
  $(".cell").mouseup(function (event) {
@@ -92,10 +105,7 @@ function wallDraw(){
       newGrid[nodenode.row][nodenode.col] = newNode;
       setTimeout(()==>{
         grid = newGrid,10*i
-
       })
-
-
   }
 }*/
 //visualize dijstras algorithm Function
@@ -110,8 +120,8 @@ function visualizeDijkstras(g) {
 $(document).ready(function() {
 //make grid
     grids = createGrid(20);
-//set start and finish nodes (hard coded to row 1 row 1, row 20, row 20)
-    //setStartFinish();
+//display grid
+displayGrid(grids);
 //wall draw
     wallDraw();
 
@@ -127,4 +137,4 @@ $(document).ready(function() {
 
 
 
-})
+});

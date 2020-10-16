@@ -2,6 +2,7 @@ const START_NODE_ROW = 9;
 const START_NODE_COL = 3;
 const END_NODE_ROW = 9;
 const END_NODE_COL = 16;
+//display grid in web
 function displayGrid(gr){
 $("#container").empty()
   const nodes = []
@@ -129,15 +130,20 @@ $(document).ready(function() {
 //display grid
 displayGrid(grids);
 //wall draw
-    wallDraw();
+    $(".whole-grid").hover(function(){
+      wallDraw();
+    });
 
   //grid
     $(".newGrid").click(function() {
-        refreshGrid();
+       this.grids = createGrid(20)
+       displayGrid(this.grids)
+       console.log(this.grids)
     });
 
   //visualize dijstras
   $(".visualize").click(function() {
+
         visualizeDijkstras(grids);
         console.log("done")
   });

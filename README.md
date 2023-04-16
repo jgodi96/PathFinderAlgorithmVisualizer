@@ -1,5 +1,5 @@
 # Path Finder Algorithm Visualizer
-Try it at http://jgodi96.pythonanywhere.com<br />Using Dijkstra's algorithm, visualize the shortest path. <br /> Create walls by holding down the mouse while dragging it around the grid .<br /> 
+Try it at http://jgodi96.pythonanywhere.com<br />Using Dijkstra's algorithm, visualize the shortest path. <br /> Create walls by holding down the mouse while dragging the cursor around the grid .<br /> 
 # What I Used
 * Dijkstra's Algorithm
 * jquery
